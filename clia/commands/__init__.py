@@ -73,6 +73,7 @@ def build_default_registry(prefix: str = COMMAND_PREFIX) -> CommandRegistry:
         unsafe_cmd,
         truncate_cmd,
         memory_cmd,
+        sh_cmd,
     )
 
     exit_cmd.register(registry)
@@ -90,4 +91,5 @@ def build_default_registry(prefix: str = COMMAND_PREFIX) -> CommandRegistry:
     unsafe_cmd.register(registry)
     truncate_cmd.register(registry)
     memory_cmd.register(registry)
+    sh_cmd.register(registry)
     return registry
