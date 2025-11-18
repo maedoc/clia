@@ -23,3 +23,24 @@ def build_tools(shell_timeout: int = 60, search_config: Optional[SearchConfig] =
     registry.register(create_file_edit_tool())
     registry.register(create_file_read_tool())
     return registry
+from .run_shell import create_tool as create_run_shell_tool
+from .read_url import create_tool as create_read_url_tool
+from .search_internet import create_tool as create_search_internet_tool
+from .bc_calc import create_tool as create_bc_calc_tool
+from .file_edit import create_tool as create_file_edit_tool
+from .file_read import create_tool as create_file_read_tool
+from .save_memory import create_tool as create_save_memory_tool
+from .recall_memory import create_tool as create_recall_memory_tool
+
+
+def build_tools(shell_timeout: int = 60, search_config: SearchConfig = None) -> ToolRegistry:
+    tools = ToolRegistry()
+    tools.register(create_run_shell_tool(shell_timeout=shell_timeout))
+    tools.register(create_read_url_tool())
+    tools.register(create_search_internet_tool(search_config=search_config))
+    tools.register(create_bc_calc_tool())
+    tools.register(create_file_edit_tool())
+    tools.register(create_file_read_tool())
+    tools.register(create_save_memory_tool())
+    tools.register(create_recall_memory_tool())
+    return tools

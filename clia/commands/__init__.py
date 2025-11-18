@@ -13,7 +13,6 @@ class CommandOutcome(Enum):
     CONTINUE = auto()
     EXIT = auto()
 
-
 class Command(Protocol):
     name: str
     description: str
@@ -21,7 +20,6 @@ class Command(Protocol):
 
     def execute(self, agent: "AgentCLI", argument: str) -> CommandOutcome:
         ...
-
 
 class CommandRegistry:
     def __init__(self, prefix: str = COMMAND_PREFIX) -> None:
@@ -57,7 +55,6 @@ class CommandRegistry:
     def list_commands(self) -> List[Command]:
         return sorted(self._commands.values(), key=lambda cmd: cmd.name)
 
-
 def build_default_registry(prefix: str = COMMAND_PREFIX) -> CommandRegistry:
     registry = CommandRegistry(prefix)
     from clia.commands import (
@@ -75,6 +72,7 @@ def build_default_registry(prefix: str = COMMAND_PREFIX) -> CommandRegistry:
         slomo_cmd,
         unsafe_cmd,
         truncate_cmd,
+        memory_cmd,
     )
 
     exit_cmd.register(registry)
@@ -91,4 +89,5 @@ def build_default_registry(prefix: str = COMMAND_PREFIX) -> CommandRegistry:
     slomo_cmd.register(registry)
     unsafe_cmd.register(registry)
     truncate_cmd.register(registry)
+    memory_cmd.register(registry)
     return registry
