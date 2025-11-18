@@ -11,9 +11,9 @@ class MemoryCommand(Command):
     def execute(self, agent: "AgentCLI", argument: str) -> CommandOutcome:
         recall_tool = agent.tools.get("recall_memory")
         if recall_tool:
-            agent.display_tool_output(recall_tool.handler({}))
+            agent._display_tool_result("recall_memory", recall_tool.handler({}))
         else:
-            agent.display_tool_output("ERROR: recall_memory tool not found.")
+            agent._display_tool_result("recall_memory", "ERROR: recall_memory tool not found.")
         return CommandOutcome.CONTINUE
 
 def register(registry: CommandRegistry) -> None:
